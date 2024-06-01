@@ -5,7 +5,7 @@ from multiselectfield import MultiSelectField # type: ignore
 # from rest_framework import fields
 
 # Create your models here.
-class Car(models.Model):
+class Product(models.Model):
     state_choice = (
         ('AL', 'Alabama'),
         ('AK', 'Alaska'),
@@ -106,9 +106,11 @@ class Car(models.Model):
     car_img4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     body_style = models.CharField(max_length=100)
     engine = models.CharField(max_length=100)
+    drivetrain = models.CharField(max_length=50)
     transmission = models.CharField(max_length=100)
     interior = models.CharField(max_length=100)
-    mileage = models.IntegerField()
+    miles = models.IntegerField()
+    mileage = models.CharField(max_length=50)
     doors = models.CharField(choices=door_choices)
     passengers = models.IntegerField()
     vin_number = models.CharField(max_length=100)

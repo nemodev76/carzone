@@ -2,19 +2,19 @@
 # from django.http import HttpResponse # type: ignore
 from django.shortcuts import render # type: ignore
 from .models import Team
-from products.models import Car
+from products.models import Product
 
 # Create your views here.
 
 def home(request):
     teams = Team.objects.all()
-    featured_cars = Car.objects.order_by('-date_created').filter(is_featured=True)
-    all_cars = Car.objects.order_by('-date_created')
+    featured_products = Product.objects.order_by('-date_created').filter(is_featured=True)
+    all_products = Product.objects.order_by('-date_created')
 
     data = {
         'teams': teams,
-        'featured_cars': featured_cars,
-        'all_cars': all_cars,
+        'featured_products': featured_products,
+        'all_products': all_products,
     }
 
     return render(request, 'pages/home.html', data)

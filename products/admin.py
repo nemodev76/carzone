@@ -1,9 +1,9 @@
 from django.contrib import admin # type: ignore
-from .models import Car
+from .models import Product
 from django.utils.html import format_html # type: ignore
 
 # Register your models here.
-class CarAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
         return format_html('<img src="{}" width=40 style="border-radius: 50px;"/>'.format(object.car_image.url))
     
@@ -15,4 +15,4 @@ class CarAdmin(admin.ModelAdmin):
     list_filter = ('city', 'body_style', 'fuel_type', 'color')
     list_editable = ('is_featured',)
 
-admin.site.register(Car, CarAdmin)
+admin.site.register(Product, ProductAdmin)
