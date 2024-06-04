@@ -1,4 +1,4 @@
-{% extends 'pages/base.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 {% load humanize %}
@@ -43,24 +43,24 @@
                                 <img src="{{aproduct.car_image.url}}" class="img-fluid" alt="slider-car">
                             </div>
                             {% if aproduct.car_img1 %}
-                            <div class="item carousel-item" data-slide-number="1">
-                                <img src="{{aproduct.car_img1.url}}" class="img-fluid" alt="slider-car">
-                            </div>
+                                <div class="item carousel-item" data-slide-number="1">
+                                    <img src="{{aproduct.car_img1.url}}" class="img-fluid" alt="slider-car">
+                                </div>
                             {% endif %}
                             {% if aproduct.car_img2 %}
-                            <div class="item carousel-item" data-slide-number="2">
-                                <img src="{{aproduct.car_img2.url}}" class="img-fluid" alt="slider-car">
-                            </div>
+                                <div class="item carousel-item" data-slide-number="2">
+                                    <img src="{{aproduct.car_img2.url}}" class="img-fluid" alt="slider-car">
+                                </div>
                             {% endif %}
                             {% if aproduct.car_img3 %}
-                            <div class="item carousel-item" data-slide-number="4">
-                                <img src="{{aproduct.car_img3.url}}" class="img-fluid" alt="slider-car">
-                            </div>
+                                <div class="item carousel-item" data-slide-number="4">
+                                    <img src="{{aproduct.car_img3.url}}" class="img-fluid" alt="slider-car">
+                                </div>
                             {% endif %}
                             {% if aproduct.car_img4 %}
-                            <div class="item carousel-item" data-slide-number="5">
-                                <img src="{{aproduct.car_img4.url}}" class="img-fluid" alt="slider-car">
-                            </div>
+                                <div class="item carousel-item" data-slide-number="5">
+                                    <img src="{{aproduct.car_img4.url}}" class="img-fluid" alt="slider-car">
+                                </div>
                             {% endif %}
                         </div>
                         <!-- main slider carousel nav controls -->
@@ -73,32 +73,32 @@
                                     </a>
                                 </li>
                                 {% if aproduct.car_img1 %}
-                                <li class="list-inline-item">
-                                    <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
-                                        <img src="{{aproduct.car_img1.url}}" class="img-fluid" alt="small-car">
-                                    </a>
-                                </li>
+                                    <li class="list-inline-item">
+                                        <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                            <img src="{{aproduct.car_img1.url}}" class="img-fluid" alt="small-car">
+                                        </a>
+                                    </li>
                                 {% endif %}
                                 {% if aproduct.car_img2 %}
-                                <li class="list-inline-item">
-                                    <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
-                                        <img src="{{aproduct.car_img2.url}}" class="img-fluid" alt="small-car">
-                                    </a>
-                                </li>
+                                    <li class="list-inline-item">
+                                        <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                            <img src="{{aproduct.car_img2.url}}" class="img-fluid" alt="small-car">
+                                        </a>
+                                    </li>
                                 {% endif %}
                                 {% if aproduct.car_img3 %}
-                                <li class="list-inline-item">
-                                    <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
-                                        <img src="{{aproduct.car_img3.url}}" class="img-fluid" alt="small-car">
-                                    </a>
-                                </li>
+                                    <li class="list-inline-item">
+                                        <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
+                                            <img src="{{aproduct.car_img3.url}}" class="img-fluid" alt="small-car">
+                                        </a>
+                                    </li>
                                 {% endif %}
                                 {% if aproduct.car_img4 %}
-                                <li class="list-inline-item">
-                                    <a id="carousel-selector-4" data-slide-to="4" data-target="#carDetailsSlider">
-                                        <img src="{{aproduct.car_img4.url}}" class="img-fluid" alt="small-car">
-                                    </a>
-                                </li>
+                                    <li class="list-inline-item">
+                                        <a id="carousel-selector-4" data-slide-to="4" data-target="#carDetailsSlider">
+                                            <img src="{{aproduct.car_img4.url}}" class="img-fluid" alt="small-car">
+                                        </a>
+                                    </li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -194,7 +194,7 @@
                                 <span>Condition:</span>{{aproduct.condition}}
                             </li>
                             <li>
-                                <span>Owners:</span>{{aproduct.no_of_owners}}
+                                <span>Owners:</span>{{aproduct.owners}}
                             </li>
                             <li>
                                 <span>Waeeanty:</span>3 Years Limited

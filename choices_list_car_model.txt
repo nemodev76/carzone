@@ -79,3 +79,46 @@ state_choice = (
         ('5', '5'),
         ('6', '6'),
     )
+
+Adaptive Cruise Control
+Airbags
+Air Conditioning
+Alarm System
+Anti-theft Protection
+Audio Interface
+Automatic Climate Control
+Automatic Headlights
+Auto Start/Stop
+Bi-Xenon Headlights
+Audio Interface
+Bluetooth Handset
+BOSE Surround Sound
+Burmester Surround Sound
+CD/DVD Autochanger
+CDR Audio
+Cruise Control
+Direct Fuel Injection
+Electric Parking Brake
+Floor Mats
+Garage Door Opener
+Leather Package
+Locking Rear Differential
+Luggage Compartments
+Manual Transmission
+Navigation Module
+Online Services
+ParkAssist
+Porsche Communication
+CD/DVD Autochanger
+Power Steering
+Reversing Camera
+Roll-over Protection
+Seat Heating
+Seat Ventilation
+Sound Package Plus
+Sport Chrono Package
+Steering Wheel Heating
+Tire Pressure Monitoring
+Universal Audio Interface
+Voice Control System
+Wind Deflector

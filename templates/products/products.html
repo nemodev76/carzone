@@ -1,7 +1,8 @@
-{% extends 'pages/base.html' %}
+{% extends 'base.html' %}
+
+{% load humanize %}
 
 {% block content %}
-
 <!-- {% load static %} -->
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -22,466 +23,106 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
-
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag">For Rent</div>
-                                    <div class="price-box">
-                                        <span>$780.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-1.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-1.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
+                    {% for product in all_products %}
+                        <div class="col-lg-6 col-md-6">
+                            <div class="car-box-3">
+                                <div class="car-thumbnail">
+                                    <a href="{% url 'product_details' product.id %}" class="car-img">
+                                        <div class="tag">For Sale</div>
+                                        <div class="price-box">
+                                            <span>${{product.price | intcomma}}</span>
+                                        </div>
+                                        <img class="d-block w-100" src="{{product.car_image.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
+                                    </a>
+                                    <div class="carbox-overlap-wrapper">
+                                        <div class="overlap-box">
+                                            <div class="overlap-btns-area">
+                                                <div class="car-magnify-gallery">
+                                                    <a href="{{product.car_image.url}}" class="overlap-btn">
+                                                        <i class="fa fa-expand"></i>
+                                                        <img class="hidden" src="{{product.car_image.url}}">
+                                                    </a>
+                                                    {% if product.car_img1 %}
+                                                        <a href="{{product.car_img1.url}}" class="hidden">
+                                                            <img class="hidden" src="{{product.car_img1.url}}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if product.car_img2 %}
+                                                        <a href="{{product.car_img2.url}}" class="hidden">
+                                                            <img class="hidden" src="{{product.car_img2.url}}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if product.car_img3 %}
+                                                        <a href="{{product.car_img3.url}}" class="hidden">
+                                                            <img class="hidden" src="{{product.car_img3.url}}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if product.car_img4 %}
+                                                        <a href="{{product.car_img4.url}}" class="hidden">
+                                                            <img class="hidden" src="{{product.car_img4.url}}">
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Lamborghini Huracán</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
+                                <div class="detail">
+                                    <h1 class="title">
+                                        <a href="{% url 'product_details' product.id %}">{{product.title}}</a>
+                                    </h1>
+                                    <div class="location">
+                                        <a href="{% url 'product_details' product.id %}">
+                                            <i class="flaticon-pin"></i>{{product.state}}, {{product.city}}
+                                        </a>
+                                    </div>
+                                    <ul class="facilities-list clearfix">
+                                        <li>{{product.fuel_type}}</li>
+                                        <li>{{product.miles | intcomma}} miles</li>
+                                        <li>{{product.transmission}}</li>
+                                        <li>{{product.body_style}}</li>
+                                        <li>{{product.color}}</li>
+                                        <li>{{product.year}}</li>
+                                    </ul>
                                 </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag-2 bg-active">Featured</div>
-                                    <div class="price-box">
-                                        <span>$940.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-6.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-6.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-6.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Audi Q7 2018</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag">For Rent</div>
-                                    <div class="price-box">
-                                        <span>$980.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-5.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-5.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Toyota Prius Specs</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag">For Sale</div>
-                                    <div class="price-box">
-                                        <span>$105.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-3.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-3.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">2015 Porsche Cayenne</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag-2 bg-active">Featured</div>
-                                    <div class="price-box">
-                                        <span>$780.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-2.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-2.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Lexus GS Red Car</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag">For Sale</div>
-                                    <div class="price-box">
-                                        <span>$780.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-4.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-4.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Toyota Corolla</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag-2 bg-active">Featured</div>
-                                    <div class="price-box">
-                                        <span>$780.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-2.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-2.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-4.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Lexus GS Red Car</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="car-box-3">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="tag">For Sale</div>
-                                    <div class="price-box">
-                                        <span>$780.00</span>
-                                    </div>
-                                    <img class="d-block w-100" src="img/car/car-4.jpg" alt="car">
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="img/car/car-4.jpg" class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="img/car/car-4.jpg">
-                                                </a>
-                                                <a href="img/car/car-2.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-2.jpg">
-                                                </a>
-                                                <a href="img/car/car-3.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-3.jpg">
-                                                </a>
-                                                <a href="img/car/car-1.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-1.jpg">
-                                                </a>
-                                                <a href="img/car/car-5.jpg" class="hidden">
-                                                    <img class="hidden" src="img/car/car-5.jpg">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="car-details.html">Toyota Corolla</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="car-details.html">
-                                        <i class="flaticon-pin"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>Petrol</li>
-                                    <li>4,000 km</li>
-                                    <li>Manual</li>
-                                    <li>Sport</li>
-                                    <li>white</li>
-                                    <li>2020</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
+
                 <!-- Page navigation start -->
                 <div class="pagination-box p-box-2 text-center">
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                            </li>
-                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                            </li>
-                        </ul>
+                        {% if all_products.has_other_pages %}
+                            <ul class="pagination">
+                                {% if all_products.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{all_products.previous_page_number}}"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                {% endif %}
+                                {% for i in all_products.paginator.page_range %}
+                                    {% if all_products.number == i %}
+                                        <li class="page-item"><a class="page-link active">{{i}}</a></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if all_products.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{all_products.next_page_number}}"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
                     </nav>
                 </div>
             </div>
@@ -489,66 +130,67 @@
                 <div class="sidebar-right">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search2">
-                        <h3 class="sidebar-title">Search your desire car</h3>
-                        <form method="GET">
+                        <h3 class="sidebar-title">Search your desired car</h3>
+                        <form action="{% url 'search' %}" method="">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="brand">
-                                    <option>Brand</option>
-                                    <option>Any</option>
-                                    <option>New</option>
-                                    <option>Semi-New</option>
-                                    <option>Damaged</option>
-                                    <option>Used</option>
+                                <input type="text" name="keyword" placeholder="Search by name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="brand">
+                                    <option selected="true" disabled="disabled">Brand</option>
+                                    {% for brand in brand_search %}
+                                        <option value="{{brand}}">{{brand}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="location">
-                                    <option>Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>American Samoa</option>
-                                    <option>Belgium</option>
-                                    <option>Cameroon</option>
-                                    <option>Canada</option>
+                                <select class="form-control search-fields" name="model">
+                                    <option selected="true" disabled="disabled">Model</option>
+                                    {% for model in model_search %}
+                                        <option value="{{model}}">{{model}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="year">
-                                    <option>Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
-                                    <option>2020</option>
+                                <select class="form-control search-fields" name="city">
+                                    <option selected="true" disabled="disabled">City</option>
+                                    {% for city in city_search %}
+                                        <option value="{{city}}">{{city}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="category">
-                                    <option>Category</option>
-                                    <option>Luxury Car</option>
-                                    <option>Pickup Truck</option>
-                                    <option>Minivan</option>
-                                    <option>Truck</option>
-                                    <option>Sports Car</option>
-                                    <option>Wagon</option>
+                                <select class="form-control search-fields" name="year">
+                                    <option selected="true" disabled="disabled">Year</option>
+                                    {% for year in year_search %}
+                                        <option value="{{year}}">{{year}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="transmission">
-                                    <option>Transmission</option>
-                                    <option>Automatic</option>
-                                    <option>Manual</option>
-                                    <option>Tiptronic</option>
+                                <select class="form-control search-fields" name="body_style">
+                                    <option selected="true" disabled="disabled">Body Style</option>
+                                    {% for body_style in body_style_search %}
+                                        <option value="{{body_style}}">{{body_style}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
+                            {% comment %} <div class="range-slider clearfix">
+                                <label>Year</label>
+                                <div data-min="2000" data-max="{{last_year}}" data-min-name="min_year" data-max-name="max_year"
+                                    data-unit="" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div> {% endcomment %}
                             <div class="range-slider clearfix">
                                 <label>Price</label>
                                 <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price"
                                     data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="form-group mb-0">
-                                <button class="search-button btn">Search</button>
+                            <div class="form-group">
+                                <button class="btn btn-block button-theme btn-md">
+                                    <i class="fa fa-search"></i> Search
+                                </button>
                             </div>
                         </form>
                     </div>

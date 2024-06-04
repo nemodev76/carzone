@@ -22,7 +22,7 @@ doors
 passengers
 vin_num
 fuel
-no_of_owners
+owners
 is_featured
 date_created
 
