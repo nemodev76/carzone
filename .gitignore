@@ -1,6 +1,6 @@
-db.sqlite3
+CarZone/.env
 CarZone/__pycache__/*
-CarZone/static/*
+CarZone/static_src/*
 pages/__pycache__/*
 pages/migrations/*
 pages/migrations/__pycache__/*
@@ -10,4 +10,7 @@ accounts/migrations/__pycache__/*
 products/__pycache__/*
 products/migrations/*
 products/migrations/__pycache__/*
-CarZone/.env
+Fields.txt
+db.sqlite3
+black-logo-sq.png
+choices_list_car_model.txt
