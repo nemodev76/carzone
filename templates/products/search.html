@@ -1,115 +1,126 @@
 
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% load humanize %}
 
-{% block content %}
-    <!-- Banner start -->
-    <div class="sub-banner overview-bgi">
-        <div class="container breadcrumb-area">
-            <div class="breadcrumb-areas">
-                <h1>Search Results</h1>
-                <ul class="breadcrumbs">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li class="active">Search</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Banner end -->
-    <!-- Search box 3 start -->
-    <div class="search-box-3 sb-7 bg-active">
-        <div class="container">
-            <div class="search-area-inner">
-                <div class="search-contents">
-                    <form method="GET">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="brand">
-                                        <option disabled="disabled" selected="selected">Select Brand</option>
-                                        {% for brand in brand_search %}
-                                            <option value="{{brand}}">{{brand}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="city">
-                                        <option disabled="disabled" selected="selected">Select Location</option>
-                                        {% for city in city_search %}
-                                            <option value="{{city}}">{{city}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="year">
-                                        <option disabled="disabled" selected="selected">Select Year</option>
-                                        {% for year in year_search %}
-                                            <option value="{{year}}">{{year}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="body_style">
-                                        <option disabled="disabled" selected="selected">Select Type Of Car</option>
-                                        {% for body_style in body_style_search %}
-                                            <option value="{{body_style}}">{{body_style}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="transmission">
-                                        <option disabled="disabled" selected="selected">Transmission</option>
-                                        {% for transmission in transmission_search %}
-                                            <option value="{{transmission}}">{{transmission}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <div class="range-slider">
-                                        <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price"
-                                            data-max-name="max_price" class="range-slider-ui ui-slider"
-                                            aria-disabled="false"></div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <button class="btn btn-block button-theme btn-md">
-                                        <i class="fa fa-search"></i>Find
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Search box 3 end -->
+{% block title %} | Search Result {% endblock title %}
 
-    <!-- Featured car start -->
-    <div class="featured-car content-area">
-        <div class="container">
-            <!-- Main title -->
-            <div class="main-title">
-                <h1>Here's your <span>Cars</span></h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+{% block content %}
+<!-- Banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Search Results</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Search</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+
+<!-- Search box 3 start -->
+<div class="search-box-3 sb-7 bg-active">
+    <div class="container">
+        <div class="search-area-inner">
+            <div class="search-contents">
+                <form method="GET">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="brand">
+                                    <option disabled="disabled" selected="selected">&nbsp;Brand</option>
+                                    {% for brand in brand_search %}
+                                        <option value="{{brand}}">&nbsp;{{brand}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="city">
+                                    <option disabled="disabled" selected="selected">&nbsp;Location</option>
+                                    {% for city in city_search %}
+                                        <option value="{{city}}">&nbsp;{{city}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="min_year">
+                                    <option disabled="disabled" selected="selected">&nbsp;From Year</option>
+                                    {% for year in years %}
+                                        <option value="{{year}}">&nbsp;{{year}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end class="row" -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="body_style">
+                                    <option disabled="disabled" selected="selected">&nbsp;Body Style</option>
+                                    {% for body_style in body_style_search %}
+                                        <option value="{{body_style}}">&nbsp;{{body_style}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="transmission">
+                                    <option disabled="disabled" selected="selected">&nbsp;Transmission</option>
+                                    {% for transmission in transmission_search %}
+                                        <option value="{{transmission}}">&nbsp;{{transmission}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="max_year">
+                                    <option disabled="disabled" selected="selected">&nbsp;To Year</option>
+                                    {% for year in years %}
+                                        <option value="{{year}}">&nbsp;{{year}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <button class="btn btn-block button-theme btn-md">
+                                    <i class="fa fa-search"></i>Find
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- end class="row" -->
+                </form>
             </div>
-            <div class="row">
+        </div>
+    </div>
+</div>
+<!-- Search box 3 end -->
+
+<!-- Featured car start -->
+<div class="featured-car content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Here's your <span>Cars</span></h1>
+            {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> {% endcomment %}
+        </div>
+        <div class="row">
             {% for product in products %}
                 <div class="col-lg-4 col-md-6">
                     <div class="car-box">
@@ -188,9 +199,9 @@
                     </div>
                 </div>
             {% endfor %}
-            </div>
         </div>
     </div>
-    <!-- Featured car end -->
+</div>
+<!-- Featured car end -->
 
 {% endblock %}

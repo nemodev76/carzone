@@ -3,6 +3,8 @@
 {% load static %}
 {% load humanize %}
 
+{% block title %} | Home {% endblock title %}
+
 {% block content %}
 <!-- Banner start -->
 <div class="banner" id="banner">
@@ -36,6 +38,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Search box 3 start -->
         <div class="search-box-4 sb-8">
             <form action="{% url 'search' %}" method="">
@@ -44,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control search-fields" name="brand">
-                        <option selected="true" disabled="disabled">Brand</option>
+                        <option selected="true" disabled="disabled">&nbsp;Brand</option>
                         {% for brand in brand_search %}
                             <option value="{{brand}}">{{brand}}</option>
                         {% endfor %}
@@ -52,7 +55,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control search-fields" name="model">
-                        <option selected="true" disabled="disabled">Model</option>
+                        <option selected="true" disabled="disabled">&nbsp;Model</option>
                         {% for model in model_search %}
                             <option value="{{model}}">{{model}}</option>
                         {% endfor %}
@@ -60,38 +63,43 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control search-fields" name="city">
-                        <option selected="true" disabled="disabled">City</option>
+                        <option selected="true" disabled="disabled">&nbsp;Location</option>
                         {% for city in city_search %}
                             <option value="{{city}}">{{city}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="year">
-                        <option selected="true" disabled="disabled">Year</option>
-                        {% for year in year_search %}
-                            <option value="{{year}}">{{year}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
                     <select class="form-control search-fields" name="body_style">
-                        <option selected="true" disabled="disabled">Body Style</option>
+                        <option selected="true" disabled="disabled">&nbsp;Body Style</option>
                         {% for body_style in body_style_search %}
                             <option value="{{body_style}}">{{body_style}}</option>
                         {% endfor %}
                     </select>
                 </div>
-                {% comment %} <div class="range-slider clearfix">
-                    <label>Year</label>
-                    <div data-min="2000" data-max="{{last_year}}" data-min-name="min_year" data-max-name="max_year"
-                        data-unit="" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                    <div class="clearfix"></div>
-                </div> {% endcomment %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control search-fields" name="min_year">
+                                <option selected="true" disabled="disabled">&nbsp;From Year</option>
+                                {% for year in years %}
+                                    <option value="{{year}}">{{year}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control search-fields" name="max_year">
+                                <option selected="true" disabled="disabled">&nbsp;To Year</option>
+                                {% for year in years %}
+                                    <option value="{{year}}">{{year}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="range-slider clearfix">
                     <label>Price</label>
-                    <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price"
-                        data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                    <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="form-group">
@@ -102,6 +110,7 @@
             </form>
         </div>
         <!-- Search box 3 end -->
+
         <a class="carousel-control-prev none-580" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="slider-mover-left" aria-hidden="true">
                 <i class="fa fa-angle-left"></i>
@@ -116,15 +125,13 @@
 </div>
 <!-- Banner end -->
 
-<!-- Search box 2 end -->
-
 <!-- Featured car start -->
 <div class="featured-car content-area-5">
     <div class="container">
         <!-- Main title -->
         <div class="main-title">
             <h1>Featured <span>Cars</span></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> {% endcomment %}
         </div>
         <!-- Slick slider area start -->
         <div class="slick-slider-area clearfix">
@@ -216,7 +223,7 @@
         <!-- Main title -->
         <div class="main-title">
             <h1>Latest <span>Cars</span></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> {% endcomment %}
         </div>
         <div class="row">
             {% for product in all_products %}
@@ -309,7 +316,7 @@
         <!-- Main title -->
         <div class="main-title">
             <h1>Executive <span>Team</span></h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+            {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p> {% endcomment %}
         </div>
         <!-- Slick slider area start -->
         <div class="slick-slider-area clearfix">

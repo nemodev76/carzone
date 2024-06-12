@@ -15,9 +15,9 @@ def home(request):
     brand_search = Product.objects.values_list('brand', flat=True).distinct
     model_search = Product.objects.values_list('model', flat=True).distinct
     city_search = Product.objects.values_list('city', flat=True).distinct
-    year_search = Product.objects.values_list('year', flat=True).distinct
     body_style_search = Product.objects.values_list('body_style', flat=True).distinct
-    last_year = datetime.now().year + 1 # Product.objects.values('year').last()
+    current_year = datetime.now().year+1
+    years = list(range(2000, current_year+1))
 
     data = {
         'teams': teams,
@@ -26,9 +26,9 @@ def home(request):
         'brand_search': brand_search,
         'model_search': model_search,
         'city_search': city_search,
-        'year_search': year_search,
+        # 'year_search': year_search,
         'body_style_search': body_style_search,
-        'last_year': last_year,
+        'years': years,
     }
 
     return render(request, 'pages/home.html', data)

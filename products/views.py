@@ -1,6 +1,8 @@
+
 from django.shortcuts import render, get_object_or_404 # type: ignore
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator # type: ignore
 from .models import Product
+from datetime import datetime
 
 # Create your views here.
 def products(request):
@@ -11,16 +13,20 @@ def products(request):
     brand_search = Product.objects.values_list('brand', flat=True).distinct
     model_search = Product.objects.values_list('model', flat=True).distinct
     city_search = Product.objects.values_list('city', flat=True).distinct
-    year_search = Product.objects.values_list('year', flat=True).distinct
+    # year_search = Product.objects.values_list('year', flat=True).distinct
     body_style_search = Product.objects.values_list('body_style', flat=True).distinct
+    first_year = 2000
+    current_year = datetime.now().year+1
+    years = list(range(first_year, current_year+1))
 
     data = {
         'all_products': paged_products,
         'brand_search': brand_search,
         'model_search': model_search,
         'city_search': city_search,
-        'year_search': year_search,
+        # 'year_search': year_search,
         'body_style_search': body_style_search,
+        'years': years,
     }
 
     return render(request, 'products/products.html', data)
@@ -41,9 +47,14 @@ def search(request):
     brand_search = Product.objects.values_list('brand', flat=True).distinct
     model_search = Product.objects.values_list('model', flat=True).distinct
     city_search = Product.objects.values_list('city', flat=True).distinct
-    year_search = Product.objects.values_list('year', flat=True).distinct
+    # year_search = Product.objects.values_list('year', flat=True).distinct
     body_style_search = Product.objects.values_list('body_style', flat=True).distinct
     transmission_search = Product.objects.values_list('transmission', flat=True).distinct
+    first_year = 2000
+    current_year = datetime.now().year+1 # Product.objects.values('year').last()
+    years = list(range(first_year, current_year+1))
+    min_year = 0
+    max_year = 0
 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
@@ -65,10 +76,10 @@ def search(request):
         if city:
             products = products.filter(city__iexact=city)
 
-    if 'year' in request.GET:
-        year = request.GET['year']
-        if year:
-            products = products.filter(year__iexact=year)
+    # if 'year' in request.GET:
+    #     year = request.GET['year']
+    #     if year:
+    #         products = products.filter(year__iexact=year)
 
     if 'body_style' in request.GET:
         body_style = request.GET['body_style']
@@ -86,14 +97,29 @@ def search(request):
         if min_price and max_price:
             products = products.filter(price__gte=min_price, price__lte=max_price)
 
+    if 'min_year' in request.GET:
+        min_year = request.GET['min_year']
+
+    if not min_year:
+        min_year = first_year
+
+    if 'max_year' in request.GET:
+        max_year = request.GET['max_year']
+
+    if not max_year:
+        max_year = current_year
+
+    products = products.filter(year__gte=min_year, year__lte=max_year)
+
     data = {
         'products': products,
         'brand_search': brand_search,
         'model_search': model_search,
         'city_search': city_search,
-        'year_search': year_search,
+        # 'year_search': year_search,
         'body_style_search': body_style_search,
         'transmission_search': transmission_search,
+        'years': years,
     }
 
     return render(request, 'products/search.html', data)
