@@ -1,8 +1,8 @@
 from django.db import models # type: ignore
 from datetime import datetime
-from ckeditor.fields import RichTextField # type: ignore
+from django_ckeditor_5.fields import CKEditor5Field # type: ignore
 from multiselectfield import MultiSelectField # type: ignore
-# from rest_framework import fields
+from .utils import sanitize_html
 
 # Create your models here.
 class Product(models.Model):
@@ -116,8 +116,12 @@ class Product(models.Model):
     car_img3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     car_img4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     features = MultiSelectField(choices=features_choices, max_length=1000)
-    description = RichTextField()
+    description = CKEditor5Field()
     date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        self.description = sanitize_html(self.description)
+        super().save(*args, **kwargs)

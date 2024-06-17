@@ -2,9 +2,6 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% comment %} {% load socialaccount %} {% endcomment %}
-{% comment %} {% providers_media_js %} {% endcomment %}
-
 {% block title %} | Login {% endblock title %}
 
 {% block content %}
@@ -35,7 +32,6 @@
                         </a>
                     </div>
                     <h3>Sign into your account</h3>
-                    {% comment %} {% include "includes/messages.html" %} {% endcomment %}
                     <form action="{% url 'login' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group form-box">
@@ -54,7 +50,6 @@
                         </div>
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            {% comment %} {% csrf_token %} {% endcomment %}
                             <li><a href="{% url 'social:begin' 'facebook' %}" class="facebook-bg"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
                             <li><a href="{% url 'social:begin' 'google-oauth2' %}" class="google-bg"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
                         </ul>

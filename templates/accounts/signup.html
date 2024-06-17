@@ -33,7 +33,6 @@
                         </a>
                     </div>
                     <h3>Create an account</h3>
-                    {% comment %} {% include "includes/messages.html" %} {% endcomment %}
                     <form action="{% url 'signup' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group form-box">

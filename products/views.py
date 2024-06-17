@@ -1,13 +1,15 @@
 
 from django.shortcuts import render, get_object_or_404 # type: ignore
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator # type: ignore
-from .models import Product
 from datetime import datetime
+from .models import Product
+from .forms import ProductForm
+from .utils import sanitize_html
 
 # Create your views here.
 def products(request):
     all_products = Product.objects.order_by('-date_created')
-    paginator = Paginator(all_products, 2)
+    paginator = Paginator(all_products, 6)
     page = request.GET.get('page')
     paged_products = paginator.get_page(page)
     brand_search = Product.objects.values_list('brand', flat=True).distinct

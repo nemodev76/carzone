@@ -24,5 +24,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('cars/', include('products.urls')),
     path('accounts/', include('accounts.urls')),
+    path('contacts/', include('contacts.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

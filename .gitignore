@@ -10,6 +10,9 @@ accounts/migrations/__pycache__/*
 products/__pycache__/*
 products/migrations/*
 products/migrations/__pycache__/*
+contacts/__pycache__/*
+contacts/migrations/*
+contacts/migrations/__pycache__/*
 Fields.txt
 db.sqlite3
 black-logo-sq.png
