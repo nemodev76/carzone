@@ -116,7 +116,7 @@ class Product(models.Model):
     car_img3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     car_img4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     features = MultiSelectField(choices=features_choices, max_length=1000)
-    description = CKEditor5Field()
+    description = CKEditor5Field(config_name='default')
     date_created = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
