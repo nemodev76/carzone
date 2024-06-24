@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import environ # type: ignore
+from dotenv import load_dotenv
+import os
 
-# Initialize environment variables
-env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env()
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,60 +23,58 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# Execusion mode
-PRODUCTION_MODE = env.bool('PRODUCTION_MODE', default=True)
+# Execution mode
+PRODUCTION_MODE = os.getenv('PRODUCTION_MODE', 'True').lower() == 'true'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() == 'true'
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+# ALLOWED_HOSTS
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 if not PRODUCTION_MODE:
     ALLOWED_HOSTS.append('localhost')
 
-# Default primary key field type # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 
+# URL Configuration
 ROOT_URLCONF = 'CarZone.urls'
 WSGI_APPLICATION = 'CarZone.wsgi.application'
 
 # Social Authentication
 LOGIN_REDIRECT_URL = 'dashboard'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
-SOCIAL_AUTH_FACEBOOK_KEY = env('SOCIAL_AUTH_FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = env('SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI')
 
 # Email Sending
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
 
 # AWS Access
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_SIGNATURE_NAME = 's3v4',
-AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  None
-AWS_S3_VERITY = True
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-
-# Static & Media files (CSS, JavaScript, Images) # https://docs.djangoproject.com/en/5.0/howto/static-files/
+# Static & Media files (CSS, JavaScript, Images)
 if PRODUCTION_MODE:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -86,18 +84,15 @@ else:
     STATICFILES_DIRS = [
         BASE_DIR / 'static',
     ]
-
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
-
 # Messages
-from django.contrib.messages import constants as messages # type: ignore
+from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -154,19 +149,19 @@ TEMPLATES = [
     },
 ]
 
-# Database # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'carzonedbi-uae.cjs2em42sc1w.me-central-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
 
-# Password validation # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -182,20 +177,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization # https://docs.djangoproject.com/en/5.0/topics/i18n/
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
 
 if PRODUCTION_MODE:
     # Caching
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': env('AWS_REDIS_URL'),
+            'LOCATION': os.getenv('AWS_REDIS_URL'),
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             }
@@ -240,10 +233,10 @@ else:
         'loggers': {
             'django': {
                 'handlers': ['console'],
-                'level': 'WARNING',  # Adjust this to reduce noise from Django's logs
+                'level': 'WARNING',
                 'propagate': True,
             },
-            'myapp': {  # Custom logger for your application
+            'myapp': {
                 'handlers': ['file', 'console'],
                 'level': 'DEBUG',
                 'propagate': False,
@@ -251,8 +244,7 @@ else:
         },
     }
 
-
-# CKEditor 5
+# CKEditor 5 Configuration
 customColorPalette = [
     {
         'color': 'hsl(4, 90%, 58%)',
@@ -279,9 +271,6 @@ customColorPalette = [
         'label': 'Blue'
     },
 ]
-
-#  CKEDITOR_5_CUSTOM_CSS = 'path_to.css' # optional
-#  CKEDITOR_5_FILE_STORAGE = "path_to_storage.CustomStorage" # optional
 
 CKEDITOR_5_CONFIGS = {
     'default': {
