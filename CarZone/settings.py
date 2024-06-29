@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 import os
 
 # Load environment variables from .env file
@@ -30,13 +30,15 @@ PRODUCTION_MODE = os.getenv('PRODUCTION_MODE', 'True').lower() == 'true'
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-if not PRODUCTION_MODE:
+if DEBUG:
     ALLOWED_HOSTS.append('localhost')
 
 # Default primary key field type
@@ -67,8 +69,8 @@ EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
@@ -84,11 +86,12 @@ else:
     STATICFILES_DIRS = [
         BASE_DIR / 'static',
     ]
+
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
 # Messages
-from django.contrib.messages import constants as messages
+from django.contrib.messages import constants as messages # type: ignore
 
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
@@ -156,7 +159,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'carzonedbi-uae.cjs2em42sc1w.me-central-1.rds.amazonaws.com',
+        'HOST': os.getenv('DB_HOST'),
         'PORT': '5432',
     }
 }
@@ -183,7 +186,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-if PRODUCTION_MODE:
+if not DEBUG:
     # Caching
     CACHES = {
         'default': {

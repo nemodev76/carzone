@@ -13,10 +13,13 @@ products/migrations/__pycache__/*
 contacts/__pycache__/*
 contacts/migrations/*
 contacts/migrations/__pycache__/*
-carzone-key.pem
 db.sqlite3
 black-logo-sq.png
 choices_list_car_model.txt
 Fields.txt
 debug.log
 aws ec2.cmd
+carzone-key.pem
+origin_ca_rsa_root.pem
+cloudflare-autoz_one.key
+cloudflare-autoz_one.pem
