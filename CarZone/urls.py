@@ -29,6 +29,6 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if not settings.PRODUCTION_MODE:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_URL)
+# if not settings.PRODUCTION_MODE:
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_URL)

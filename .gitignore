@@ -23,3 +23,4 @@ carzone-key.pem
 origin_ca_rsa_root.pem
 cloudflare-autoz_one.key
 cloudflare-autoz_one.pem
+nginx sites-enabled.txt
